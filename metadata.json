@@ -1,0 +1,6 @@
+{
+  "name": "SOLEVAULT UK",
+  "description": "Mobile-friendly shoe catalogue and sales-tracking web app for SOLEVAULT UK",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
