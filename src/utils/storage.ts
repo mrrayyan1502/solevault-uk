@@ -3,10 +3,25 @@ import { INITIAL_PRODUCTS } from '../data/initialProducts';
 import { INITIAL_SALES } from '../data/initialSales';
 
 const STORAGE_KEYS = {
-  PRODUCTS: 'solevault_products_v6',
+  PRODUCTS: 'solevault_products_v7',
   SALES: 'solevault_sales_v1',
   SETTINGS: 'solevault_settings_v2',
 };
+
+export function resolveImageUrl(imagePath: string | undefined): string {
+  if (!imagePath) return '';
+  if (
+    imagePath.startsWith('http://') ||
+    imagePath.startsWith('https://') ||
+    imagePath.startsWith('data:') ||
+    imagePath.startsWith('blob:')
+  ) {
+    return imagePath;
+  }
+  const clean = imagePath.replace(/^\/+/, '');
+  const base = import.meta.env.BASE_URL || './';
+  return `${base.endsWith('/') ? base : base + '/'}${clean}`;
+}
 
 export const DEFAULT_SETTINGS: AppSettings = {
   storeName: 'SOLEVAULT UK',

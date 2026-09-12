@@ -11,6 +11,7 @@ import {
   cleanExtraAndRenumber,
   renumberProducts,
   isUserUploadedImage,
+  resolveImageUrl,
 } from '../utils/storage';
 import { AdminProductModal } from './AdminProductModal';
 import { AdminBatchUploader } from './AdminBatchUploader';
@@ -613,7 +614,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                           onClick={() => onSelectProduct(product.sku)}
                         >
                           <img
-                            src={product.image}
+                            src={resolveImageUrl(product.image)}
                             alt={product.sku}
                             className="w-full h-full object-cover"
                             referrerPolicy="no-referrer"

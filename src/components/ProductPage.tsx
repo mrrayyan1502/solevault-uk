@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from '../types';
-import { generateWhatsAppUrl, getProductShareUrl } from '../utils/storage';
+import { generateWhatsAppUrl, getProductShareUrl, resolveImageUrl } from '../utils/storage';
 import { MessageCircle, Share2, ArrowLeft, Check, Clock, ShieldCheck, Truck, Sparkles, Footprints, Flame } from 'lucide-react';
 import { SoleVaultLogo } from './SoleVaultLogo';
 
@@ -77,7 +77,7 @@ export const ProductPage: React.FC<ProductPageProps> = ({
         <div className="relative aspect-square md:aspect-auto w-full bg-stone-950 flex items-center justify-center p-4">
           {!imageError ? (
             <img
-              src={product.image}
+              src={resolveImageUrl(product.image)}
               alt={`${product.sku} - ${product.name}`}
               className="w-full h-full object-cover rounded-2xl"
               referrerPolicy="no-referrer"
