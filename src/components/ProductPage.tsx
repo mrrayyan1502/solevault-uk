@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from '../types';
 import { generateWhatsAppUrl, getProductShareUrl, resolveImageUrl } from '../utils/storage';
-import { ShoeImage360 } from './ShoeImage360';
 import { MessageCircle, Share2, ArrowLeft, Check, Clock, ShieldCheck, Truck, Sparkles, Footprints, Flame } from 'lucide-react';
 import { SoleVaultLogo } from './SoleVaultLogo';
 
@@ -77,14 +76,13 @@ export const ProductPage: React.FC<ProductPageProps> = ({
         {/* Left: Large Shoe Image */}
         <div className="relative aspect-square md:aspect-auto w-full bg-stone-950 flex items-center justify-center p-4">
           {!imageError ? (
-            <div className="w-full h-full min-h-[360px] md:min-h-[480px] rounded-2xl overflow-hidden flex items-center justify-center">
-              <ShoeImage360
-                src={resolveImageUrl(product.image)}
-                alt={`${product.sku} - ${product.name}`}
-                sku={product.sku}
-                isHero={true}
-              />
-            </div>
+            <img
+              src={resolveImageUrl(product.image)}
+              alt={`${product.sku} - ${product.name}`}
+              className="w-full h-full object-cover rounded-2xl"
+              referrerPolicy="no-referrer"
+              onError={() => setImageError(true)}
+            />
           ) : (
             <div className="w-full h-full min-h-[300px] flex flex-col items-center justify-center p-8 text-center bg-stone-950/90 rounded-2xl border border-stone-800">
               <div className="p-5 rounded-3xl bg-stone-900 border border-stone-800 text-amber-400 mb-3 shadow-inner">
@@ -102,13 +100,13 @@ export const ProductPage: React.FC<ProductPageProps> = ({
 
           {/* Discount Badge */}
           {product.discountPercentage > 0 && (
-            <div className="absolute top-6 left-6 bg-red-600 text-white font-black text-sm px-3.5 py-1.5 rounded-full shadow-lg tracking-wider uppercase">
+            <div className="absolute top-3 sm:top-6 left-3 sm:left-6 bg-red-600 text-white font-black text-xs sm:text-sm px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full shadow-lg tracking-wider uppercase">
               {product.discountPercentage}% OFF
             </div>
           )}
 
           {/* SKU Pill */}
-          <div className="absolute top-6 right-6 bg-stone-950/80 backdrop-blur-md text-amber-400 border border-stone-700/80 font-mono text-sm font-bold px-3 py-1 rounded-xl">
+          <div className="absolute top-3 sm:top-6 right-3 sm:right-6 bg-stone-950/80 backdrop-blur-md text-amber-400 border border-stone-700/80 font-mono text-xs sm:text-sm font-bold px-2.5 sm:px-3 py-1 rounded-xl">
             {product.sku}
           </div>
         </div>

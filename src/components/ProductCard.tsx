@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from '../types';
 import { generateWhatsAppUrl, getProductShareUrl, resolveImageUrl } from '../utils/storage';
-import { ShoeImage360 } from './ShoeImage360';
 import { MessageCircle, Share2, Check, ArrowUpRight, Clock, Truck, Footprints, Flame } from 'lucide-react';
 
 interface ProductCardProps {
@@ -48,10 +47,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Product Image Container */}
       <div className="relative aspect-square w-full bg-stone-950 overflow-hidden flex items-center justify-center">
         {!imageError ? (
-          <ShoeImage360
+          <img
             src={resolveImageUrl(product.image)}
             alt={`${product.sku} - ${product.name}`}
-            sku={product.sku}
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={() => setImageError(true)}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-stone-950/90 border-b border-stone-800">
@@ -139,7 +141,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Pricing System */}
-        <div className="pt-2 border-t border-stone-800 flex items-end justify-between">
+        <div className="pt-2 border-t border-stone-800 flex flex-wrap items-end justify-between gap-2">
           <div>
             {product.discountPercentage > 0 ? (
               <div className="flex items-center gap-2 mb-0.5">
