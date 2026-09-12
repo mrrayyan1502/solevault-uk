@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from '../types';
 import { generateWhatsAppUrl, getProductShareUrl, resolveImageUrl } from '../utils/storage';
+import { ShoeImage360 } from './ShoeImage360';
 import { MessageCircle, Share2, Check, ArrowUpRight, Clock, Truck, Footprints, Flame } from 'lucide-react';
 
 interface ProductCardProps {
@@ -47,13 +48,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Product Image Container */}
       <div className="relative aspect-square w-full bg-stone-950 overflow-hidden flex items-center justify-center">
         {!imageError ? (
-          <img
+          <ShoeImage360
             src={resolveImageUrl(product.image)}
             alt={`${product.sku} - ${product.name}`}
-            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-            referrerPolicy="no-referrer"
-            onError={() => setImageError(true)}
+            sku={product.sku}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-stone-950/90 border-b border-stone-800">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Product } from '../types';
 import { generateWhatsAppUrl, getProductShareUrl, resolveImageUrl } from '../utils/storage';
+import { ShoeImage360 } from './ShoeImage360';
 import { MessageCircle, Share2, ArrowLeft, Check, Clock, ShieldCheck, Truck, Sparkles, Footprints, Flame } from 'lucide-react';
 import { SoleVaultLogo } from './SoleVaultLogo';
 
@@ -76,13 +77,14 @@ export const ProductPage: React.FC<ProductPageProps> = ({
         {/* Left: Large Shoe Image */}
         <div className="relative aspect-square md:aspect-auto w-full bg-stone-950 flex items-center justify-center p-4">
           {!imageError ? (
-            <img
-              src={resolveImageUrl(product.image)}
-              alt={`${product.sku} - ${product.name}`}
-              className="w-full h-full object-cover rounded-2xl"
-              referrerPolicy="no-referrer"
-              onError={() => setImageError(true)}
-            />
+            <div className="w-full h-full min-h-[360px] md:min-h-[480px] rounded-2xl overflow-hidden flex items-center justify-center">
+              <ShoeImage360
+                src={resolveImageUrl(product.image)}
+                alt={`${product.sku} - ${product.name}`}
+                sku={product.sku}
+                isHero={true}
+              />
+            </div>
           ) : (
             <div className="w-full h-full min-h-[300px] flex flex-col items-center justify-center p-8 text-center bg-stone-950/90 rounded-2xl border border-stone-800">
               <div className="p-5 rounded-3xl bg-stone-900 border border-stone-800 text-amber-400 mb-3 shadow-inner">
