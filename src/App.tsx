@@ -42,12 +42,11 @@ export default function App() {
   // Views: 'catalogue' | 'product' | 'admin'
   const [currentView, setCurrentView] = useState<'catalogue' | 'product' | 'admin'>(() => {
     if (typeof window !== 'undefined') {
-      if (window.location.hash === '#/catalogue') return 'catalogue';
+      if (window.location.hash === '#/admin') return 'admin';
       if (window.location.hash.startsWith('#/product/')) return 'product';
-      // Default to admin as requested by user
-      return 'admin';
+      return 'catalogue';
     }
-    return 'admin';
+    return 'catalogue';
   });
   const [selectedSku, setSelectedSku] = useState<string | null>(null);
 
@@ -98,6 +97,8 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (hash === '#/admin') {
         setCurrentView('admin');
+      } else {
+        setCurrentView('catalogue');
       }
     };
 
